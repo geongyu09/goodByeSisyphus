@@ -17,6 +17,7 @@
 - 보안: `.claude/skills/spec/references/security.md`
 - 배포: `.claude/skills/spec/references/deploy.md`
 - 개발 순서·한계·참고 링크: `.claude/skills/spec/references/dev-order-and-limits.md`
+- 결정 기록(모든 결정을 여기 한 곳에): `.claude/skills/spec/references/decisions.md`
 
 ## 개발 진행
 로드맵 기반으로 진행한다: `/roadmap` (다음 작업), `/roadmap status`, `/roadmap sync`

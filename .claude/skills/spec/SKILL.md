@@ -22,8 +22,10 @@ description: 코치님 롤링페이퍼의 기획/설계 문서(SSOT). 기능 명
 | `references/security.md` | 보안 체크리스트 | 액션을 추가·수정할 때, 배포 전 점검 |
 | `references/deploy.md` | Vercel 배포(채택), Netlify(대안) | 배포 작업 |
 | `references/dev-order-and-limits.md` | 개발 순서 제안, 알려진 한계, 참고 링크 | 작업 순서를 정할 때, 한계와 관련된 요청, API 이름을 다시 확인할 때 |
+| `references/decisions.md` | 지금까지 내린 결정과 이유(D-n) | 결정을 내렸을 때(항상 추가), 문서가 왜 이렇게 되어 있는지 확인할 때 |
 
 `Prototype.dc.html`은 Design 런타임(`./support.js`)이 있어야 실행되므로 저장소에서는 열어 볼 수 없다. 화면 기준 자료로 읽기만 한다.
 
 ## 문서 수정
 - 사용자 확인을 받은 뒤 `references/`를 직접 수정한다. 수정 후 `/roadmap sync`로 로드맵을 맞춘다.
+- 수정의 이유는 `references/decisions.md`에 결정으로 남긴다(`.claude/rules/ssot.md` 7번).
