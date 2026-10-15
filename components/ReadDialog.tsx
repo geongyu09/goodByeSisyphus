@@ -36,7 +36,7 @@ export default function ReadDialog({ note, pos, total, onPrev, onNext, onClose, 
   let deleteLabel = confirming ? '한 번 더 누르면 지워져요' : '내 메모 지우기';
   if (deleting) deleteLabel = '지우는 중…';
   return (
-    <div style={{ position: 'fixed', inset: 0, zIndex: 40, background: 'rgba(30,18,6,0.65)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 28, boxSizing: 'border-box', overflowY: 'auto' }}>
+    <div className="no-print" style={{ position: 'fixed', inset: 0, zIndex: 40, background: 'rgba(30,18,6,0.65)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 28, boxSizing: 'border-box', overflowY: 'auto' }}>
       <div role="dialog" aria-modal="true" aria-label="메모 자세히 보기" style={{ width: '100%', maxWidth: 560, margin: 'auto', display: 'flex', flexDirection: 'column', gap: 16 }}>
         <div style={{ position: 'relative', background: c.bg, padding: '48px 32px 28px', boxShadow: '0 18px 30px rgba(0,0,0,0.4)' }}>
           <span aria-hidden="true" style={{ position: 'absolute', top: 14, left: '50%', width: 18, height: 18, marginLeft: -9, borderRadius: '50%', background: notePin(note.id), boxShadow: 'inset -3px -3px 0 rgba(0,0,0,0.25), 0 3px 4px rgba(0,0,0,0.35)' }} />

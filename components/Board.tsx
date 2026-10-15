@@ -1,5 +1,6 @@
 'use client';
-import { useOptimistic, useState, useTransition, type MouseEvent } from 'react';
+import { useEffect, useOptimistic, useState, useTransition, type MouseEvent } from 'react';
+import { flushSync } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { addNote, placeSticker, removeSticker, removeNote } from '@/app/actions';
 import type { Note } from '@/lib/board';
@@ -68,8 +69,21 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
   const [mode, setMode] = useState<Mode>('off');
   const [tool, setTool] = useState(0);
   const [lastAction, setLastAction] = useState('');
+  const [printing, setPrinting] = useState(false);
 
-  const q = query.trim().toLowerCase();
+  // 인쇄 창이 화면을 찍기 전에 검색어와 더 보기를 무시한 모든 메모를 그려 둔다 (D-20, D-21)
+  useEffect(() => {
+    const before = () => flushSync(() => setPrinting(true));
+    const after = () => setPrinting(false);
+    window.addEventListener('beforeprint', before);
+    window.addEventListener('afterprint', after);
+    return () => {
+      window.removeEventListener('beforeprint', before);
+      window.removeEventListener('afterprint', after);
+    };
+  }, []);
+
+  const q = printing ? '' : query.trim().toLowerCase();
   const filtered = (q ? notes.filter((n) => n.nick.toLowerCase().includes(q) || n.msg.toLowerCase().includes(q)) : [...notes]).sort(newest);
   if (sort === 'old') filtered.reverse();
   if (sort === 'stickers') filtered.sort((a, b) => b.stickers.length - a.stickers.length);
@@ -81,7 +95,7 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
     }
   }
 
-  const visible = filtered.slice(0, shown);
+  const visible = printing ? filtered : filtered.slice(0, shown);
   const remaining = filtered.length - visible.length;
   const stickerTotal = notes.reduce((sum, n) => sum + n.stickers.length, 0);
   const navList = filtered.some((n) => n.id === openId) ? filtered : notes;
@@ -168,7 +182,10 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
     <div style={{ minHeight: '100vh', padding: '0 0 200px' }}>
       <header style={{ maxWidth: 1160, margin: '0 auto', padding: '24px 24px 0', display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'space-between', alignItems: 'center' }}>
         <p style={{ ...paperTag, padding: '8px 14px', fontSize: 15, color: '#2B1D10', boxShadow: '0 2px 0 rgba(0,0,0,0.15)' }}>우아한테크코스 8기 크루 일동</p>
-        <button type="button" onClick={openWrite} style={{ ...darkPill, minHeight: 44, padding: '0 20px' }}>{pencil}메시지 남기기</button>
+        <div className="no-print" style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+          <button type="button" onClick={() => window.print()} style={{ minHeight: 44, padding: '0 20px', border: '1px solid #2B1D10', borderRadius: 999, background: '#FFFDF7', color: '#2B1D10', fontSize: 16, cursor: 'pointer' }}>PDF로 저장</button>
+          <button type="button" onClick={openWrite} style={{ ...darkPill, minHeight: 44, padding: '0 20px' }}>{pencil}메시지 남기기</button>
+        </div>
       </header>
 
       <section style={{ maxWidth: 1160, margin: '0 auto', padding: '48px 24px 16px', display: 'flex', justifyContent: 'center' }}>
@@ -182,7 +199,7 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
         </div>
       </section>
 
-      <div id="board-top" style={{ position: 'sticky', top: 0, zIndex: 10, maxWidth: 1160, margin: '0 auto', padding: '12px 24px' }}>
+      <div id="board-top" className="no-print" style={{ position: 'sticky', top: 0, zIndex: 10, maxWidth: 1160, margin: '0 auto', padding: '12px 24px' }}>
         <div style={{ background: '#FFFDF7', borderRadius: 10, boxShadow: '0 8px 18px rgba(40,20,5,0.3)', padding: 12, display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
           <label style={{ flex: '1 1 240px', display: 'flex', alignItems: 'center', gap: 8, minHeight: 44, padding: '0 12px', border: '1px solid #C9B9A4', borderRadius: 8, background: '#FFFFFF', color: '#6B5440' }}>
             <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
@@ -206,10 +223,10 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
       </div>
 
       <section aria-label="크루들의 메시지" style={{ maxWidth: 1160, margin: '0 auto', padding: '8px 24px 0' }}>
-        <p aria-live="polite" style={{ ...paperTag, marginBottom: 8, display: 'inline-block', padding: '6px 12px', fontSize: 14 }}>{statusText}</p>
+        <p aria-live="polite" className="no-print" style={{ ...paperTag, marginBottom: 8, display: 'inline-block', padding: '6px 12px', fontSize: 14 }}>{statusText}</p>
 
         {justAdded && (
-          <p style={{ margin: '8px 0 0', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 10, background: '#2B1D10', color: '#FFF6E8', padding: '10px 14px', borderRadius: 8, fontSize: 15 }}>
+          <p className="no-print" style={{ margin: '8px 0 0', display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 10, background: '#2B1D10', color: '#FFF6E8', padding: '10px 14px', borderRadius: 8, fontSize: 15 }}>
             방금 붙인 메모가 보드 맨 앞에 있어요.
             <button type="button" onClick={() => setJustAdded(null)} style={{ marginLeft: 'auto', minHeight: 36, padding: '0 12px', border: '1px solid #FFF6E8', borderRadius: 999, background: 'transparent', color: '#FFF6E8', fontSize: 14, cursor: 'pointer' }}>확인</button>
           </p>
@@ -245,7 +262,7 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
         <p style={{ ...paperTag, display: 'inline-block', padding: '8px 14px', fontSize: 14 }}>8기 크루들이 함께 만들었어요</p>
       </footer>
 
-      <div style={{ position: 'fixed', right: 20, bottom: 112, zIndex: 20, display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-end' }}>
+      <div className="no-print" style={{ position: 'fixed', right: 20, bottom: 112, zIndex: 20, display: 'flex', flexDirection: 'column', gap: 10, alignItems: 'flex-end' }}>
         <a href="#board-top" aria-label="보드 맨 위로" style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 48, height: 48, borderRadius: '50%', background: '#FFFDF7', color: '#2B1D10', boxShadow: '0 8px 16px rgba(40,20,5,0.35)' }}>
           <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6" /></svg>
         </a>

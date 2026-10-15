@@ -38,6 +38,7 @@
 - [x] `components/Board.tsx`: 검색, 정렬(최신·오래된·스티커 많은 순·무작위 `rng`), 더 보기, 상태 문구, 빈 보드·검색 결과 없음(D-8, D-13) — 근거: `.claude/skills/spec/references/ui.md#7-2-클라이언트-컴포넌트에서-낙관적-업데이트`, `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`, `.claude/skills/spec/references/Prototype.dc.html` (`renderVals()`)
 - [x] `components/ReadDialog.tsx`: 읽기 모달(이전/다음, 위치 표시, 닫기), "한 장 뽑아 읽기", 스티커 개수 요약 — 근거: `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`, `.claude/skills/spec/references/Prototype.dc.html` (`hasOpen` 모달)
 - [x] `app/page.tsx`: `Suspense`와 `BoardLoader`로 `getBoard()` 결과를 `Board`에 전달(입장 확인과 `myKey`는 Phase 3에서 연결) — 근거: `.claude/skills/spec/references/ui.md#7-1-페이지`
+- [x] "PDF로 저장" 버튼: 인쇄할 때 모든 메모를 전문으로 그리고 버튼·도구·모달을 빼기(D-20, D-21) — 근거: `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`
 
 ## Phase 3: 작성자 식별과 입장 코드
 목표: 로그인 없이 브라우저마다 작성자 키를 발급하고, 입장 코드를 확인한 브라우저만 보드를 볼 수 있게 한다.

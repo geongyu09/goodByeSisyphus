@@ -17,3 +17,12 @@ a:hover { color: #2E1C0C; }
 .note:focus-visible, button:focus-visible, a:focus-visible, select:focus-visible, textarea:focus-visible, input:focus-visible { outline: 3px solid #2B1D10; outline-offset: 3px; }
 .dock button:focus-visible { outline: 3px solid #FFE58A; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* PDF로 저장 (D-20, D-21) */
+@media print {
+  @page { margin: 0; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .no-print, .dock { display: none !important; }
+  .note { break-inside: avoid; align-self: start; }
+  .clamp5 { display: block; overflow: visible; }
+}

@@ -34,11 +34,11 @@ export default function NoteCard({ note, me, mode, isNew, onClick }: {
   return (
     <button type="button" className="note" onClick={onClick} style={{ position: 'relative', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: 12, width: '100%', minHeight: 230, padding: '36px 22px 16px', boxSizing: 'border-box', border: 0, textAlign: 'left', color: '#2B1D10', background: c.bg, transform: `rotate(${noteRotation(note.id)}deg)`, boxShadow: '0 10px 14px rgba(40,20,5,0.3)', cursor: mode === 'off' ? 'pointer' : 'crosshair' }}>
       <span aria-hidden="true" style={{ position: 'absolute', top: 10, left: '50%', width: 16, height: 16, marginLeft: -8, borderRadius: '50%', background: notePin(note.id), boxShadow: 'inset -3px -3px 0 rgba(0,0,0,0.25), 0 3px 4px rgba(0,0,0,0.35)' }} />
-      {isNew && <span style={{ position: 'absolute', top: -12, left: 8, zIndex: 2, background: '#2B1D10', color: '#FFF6E8', fontSize: 13, padding: '4px 10px', borderRadius: 999 }}>방금 붙인 메모</span>}
+      {isNew && <span className="no-print" style={{ position: 'absolute', top: -12, left: 8, zIndex: 2, background: '#2B1D10', color: '#FFF6E8', fontSize: 13, padding: '4px 10px', borderRadius: 999 }}>방금 붙인 메모</span>}
       <span className="clamp5" style={{ fontFamily: 'var(--font-pen), cursive', fontSize: 25, lineHeight: 1.3, whiteSpace: 'pre-line' }}>{note.msg}</span>
       <span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8, fontFamily: 'var(--font-pen), cursive', fontSize: 22, color: c.from }}>
-        <span>{note.msg.length > 80 || note.msg.includes('\n') ? '펼쳐 보기' : ''}</span>
-        <span>From. {note.nick}</span>
+        <span className="no-print">{note.msg.length > 80 || note.msg.includes('\n') ? '펼쳐 보기' : ''}</span>
+        <span style={{ marginLeft: 'auto' }}>From. {note.nick}</span>
       </span>
       {note.stickers.map((s) => (
         <PlacedSticker key={s.authorKey} s={s} size={40} outline={s.authorKey === me && mode !== 'off' ? '2px dashed #2B1D10' : 'none'} />
