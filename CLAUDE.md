@@ -21,3 +21,6 @@
 
 ## 개발 진행
 로드맵 기반으로 진행한다: `/roadmap` (다음 작업), `/roadmap status`, `/roadmap sync`
+
+## 웹 확인
+웹 기반 확인(화면 동작 확인, 스크린샷, 콘솔 확인 등)은 모두 aside(`aside-browser` 스킬)로 한다.
