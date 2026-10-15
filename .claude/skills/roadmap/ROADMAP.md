@@ -33,7 +33,7 @@
 - [ ] `app/layout.tsx`: Gaegu·Nanum Pen Script·Gowun Dodum 폰트 적용 — 근거: `.claude/skills/spec/references/ui.md#7-4-폰트`
 - [ ] `lib/visual.ts`: 메모 id 해시로 기울기·핀 색 계산 — 근거: `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`
 - [ ] 스티커 8종 SVG 경로와 메모 색 4종을 상수로 옮기기(파일 위치는 미결정 사항 참고) — 근거: `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`, `.claude/skills/spec/references/Prototype.dc.html` (`stickers()`, `colors()`)
-- [ ] 보드 틀: 코르크 배경, 헤더, 인사말 카드(메모·스티커 수), 푸터, 맨 위로·메모 붙이기 플로팅 버튼 — 근거: `.claude/skills/spec/references/Prototype.dc.html` (`<header>`, 인사말 `<section>`, `<footer>`), `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`
+- [ ] 보드 틀: 코르크 배경, 헤더, 인사말 카드(메모·스티커 수), 푸터, 맨 위로·메모 붙이기 플로팅 버튼 — 근거: `.claude/skills/spec/references/Prototype.dc.html` (`<header>`, 인사말 `<section>`, `<footer>`), `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기` (자리표시자 값: D-6)
 - [ ] `components/NoteCard.tsx`: 메모 카드(색·핀·기울기·5줄 말줄임·"펼쳐 보기"·From·스티커 표시, 줄바꿈은 `pre-line`) — 근거: `.claude/skills/spec/references/Prototype.dc.html` (`.note` 버튼, `view()`), `.claude/skills/spec/references/security.md#8-보안-체크리스트`
 - [ ] `components/Board.tsx`: 검색, 정렬(최신·오래된·스티커 많은 순·무작위 `rng`), 더 보기, 상태 문구, 빈 보드·검색 결과 없음 — 근거: `.claude/skills/spec/references/ui.md#7-2-클라이언트-컴포넌트에서-낙관적-업데이트`, `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`, `.claude/skills/spec/references/Prototype.dc.html` (`renderVals()`)
 - [ ] `components/ReadDialog.tsx`: 읽기 모달(이전/다음, 위치 표시, 닫기), "한 장 뽑아 읽기", 스티커 개수 요약 — 근거: `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`, `.claude/skills/spec/references/Prototype.dc.html` (`hasOpen` 모달)
@@ -75,7 +75,6 @@
 - [ ] (사용자) 전달 당일: 입장 코드 전달 또는 `BOARD_PASSCODE` 교체 후 재배포, Notes 데이터베이스 기념본 복제 — 근거: `.claude/skills/spec/references/dev-order-and-limits.md#10-개발-순서-제안`, `.claude/skills/spec/references/identity-gate.md#5-2-입장-코드-libgatets`
 
 ## 미결정 사항
-- 프로토타입의 자리표시자 `[기수]`, `[코치 닉네임]`, `[함께한 기간]`에 들어갈 실제 값 — 관련: `.claude/skills/spec/references/Prototype.dc.html` (`<header>`, 인사말 `<section>`, `<footer>`)
 - 입장 코드 화면(`app/gate/page.tsx`)의 모양과 문구: 프로토타입에 이 화면이 없다 — 관련: `.claude/skills/spec/references/nextjs-setup.md#3-4-폴더-구조`, `.claude/skills/spec/references/identity-gate.md#5-2-입장-코드-libgatets`
 - 스티커·메모 색 상수 파일 위치: 7-3은 `stickers.ts`라고만 하고 3-4 폴더 구조에는 없다 — 관련: `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`, `.claude/skills/spec/references/nextjs-setup.md#3-4-폴더-구조`
 - "더 보기" 한 번에 보여 줄 메모 장수: 문서에 없고, 프로토타입 테스트 속성 `pageSize`의 기본값은 30이다 — 관련: `.claude/skills/spec/references/Prototype.dc.html` (`data-props`)
