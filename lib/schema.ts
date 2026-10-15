@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const NoteInput = z.object({
   nick: z.string().trim().min(1).max(20),
-  msg: z.string().trim().min(1).max(300),
+  msg: z.string().trim().min(1).max(500),
   color: z.number().int().min(0).max(3),
 });
 

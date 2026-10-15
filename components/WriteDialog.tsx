@@ -34,9 +34,9 @@ export default function WriteDialog({ draft, onChange, error, onSubmit, onClose 
         </fieldset>
         <label style={labelStyle}>
           메시지
-          <textarea rows={6} maxLength={300} value={draft.msg} onChange={(e) => onChange({ ...draft, msg: e.target.value.slice(0, 300) })} placeholder="시지프에게 전하고 싶은 말을 적어주세요" style={{ fontFamily: 'var(--font-pen), cursive', fontSize: 24, lineHeight: 1.3, padding: '12px 14px', border: '1px solid #C9B9A4', borderRadius: 6, color: '#2B1D10', resize: 'vertical', background: (COLORS[draft.color] ?? COLORS[0]).bg }} />
+          <textarea rows={6} maxLength={500} value={draft.msg} onChange={(e) => onChange({ ...draft, msg: e.target.value.slice(0, 500) })} placeholder="시지프에게 전하고 싶은 말을 적어주세요" style={{ fontFamily: 'var(--font-pen), cursive', fontSize: 24, lineHeight: 1.3, padding: '12px 14px', border: '1px solid #C9B9A4', borderRadius: 6, color: '#2B1D10', resize: 'vertical', background: (COLORS[draft.color] ?? COLORS[0]).bg }} />
         </label>
-        <p style={{ margin: '-8px 0 0', textAlign: 'right', fontSize: 13, color: '#6B5440' }}>{draft.msg.length} / 300자</p>
+        <p style={{ margin: '-8px 0 0', textAlign: 'right', fontSize: 13, color: '#6B5440' }}>{draft.msg.length} / 500자</p>
         <label style={labelStyle}>
           보내는 사람
           <input type="text" maxLength={20} value={draft.nick} onChange={(e) => onChange({ ...draft, nick: e.target.value.slice(0, 20) })} placeholder="닉네임" style={{ fontSize: 16, minHeight: 44, padding: '0 14px', border: '1px solid #C9B9A4', borderRadius: 6, background: '#FFFFFF', color: '#2B1D10' }} />

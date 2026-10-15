@@ -55,7 +55,7 @@
 완료 조건: 메모를 쓰면 바로 보드 맨 앞에 보이고 새로고침해도 남아 있다. 스티커 붙이기·옮기기(한 장에 한 개)·떼기가 Notion에 반영된다. 시크릿 창 두 개에서 다른 사람의 스티커는 뗄 수 없다. 스티커 쓰기 한 번에 Notion 요청이 한 번만 일어난다. 범위를 벗어난 입력이나 입장하지 않은 요청은 서버에서 거부된다.
 
 - [x] `app/actions.ts`: `addNote` — 근거: `.claude/skills/spec/references/server-actions.md#6-2-액션`
-- [x] `components/WriteDialog.tsx`: 작성 모달(색 4종, 메시지 300자·닉네임 20자, 글자 수, 제출 비활성), 작성 뒤 맨 앞 표시·안내 문구·"방금 붙인 메모" 배지·검색과 정렬 초기화 — 근거: `.claude/skills/spec/references/Prototype.dc.html` (`writing` 모달, `onSubmit`), `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`
+- [x] `components/WriteDialog.tsx`: 작성 모달(색 4종, 메시지 500자·닉네임 20자, 글자 수, 제출 비활성), 작성 뒤 맨 앞 표시·안내 문구·"방금 붙인 메모" 배지·검색과 정렬 초기화 — 근거: `.claude/skills/spec/references/Prototype.dc.html` (`writing` 모달, `onSubmit`), `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`
 - [x] `app/actions.ts`: `placeSticker` — 근거: `.claude/skills/spec/references/server-actions.md#6-2-액션`
 - [x] `app/actions.ts`: `removeSticker`(휴지통 속성 `in_trash`·`archived`는 SDK 타입 정의로 확인) — 근거: `.claude/skills/spec/references/server-actions.md#6-2-액션`
 - [x] `components/StickerDock.tsx`: 스티커 도구(선택·스티커 8종·떼기, 안내 문구, 내 스티커 점선 테두리), 클릭 위치 % 계산, "붙이는 사람" 선택 상자 제거 — 근거: `.claude/skills/spec/references/Prototype.dc.html` (`.dock`, `handleNote()`), `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`

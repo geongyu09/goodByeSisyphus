@@ -163,3 +163,11 @@
 - 이유: 먼저 지운 것처럼 보였다가 실패해서 되살아나지 않게 한다. 저장 전 메모는 Notion id가 없어 지울 수 없다. 스티커 행까지 지우면 스티커 수만큼 쓰기 요청이 늘어나는데, `getBoard()`가 보드에 있는 메모 기준으로 스티커를 묶어서 화면에는 어차피 나오지 않는다.
 - 검토한 대안: (1) 다른 쓰기처럼 낙관적 업데이트로 먼저 빼고, 실패하면 모달을 다시 연다. (2) 메모를 지울 때 그 메모의 스티커 행도 휴지통으로 보낸다.
 - 바뀐 곳: 문서 `server-actions.md` 6-2, `ui.md` 7-3. 코드 `components/Board.tsx`, `components/ReadDialog.tsx`.
+
+### D-19. 메모 메시지 길이 제한을 500자로 늘린다 (2026-10-15)
+- 상태: 확정
+- 결정: 사용자
+- 내용: 메시지 최대 길이를 300자에서 500자로 바꾼다. 서버 검증(`NoteInput`)과 작성 모달의 입력 제한·글자 수 표시를 함께 바꾼다. 닉네임 20자는 그대로 둔다.
+- 이유: 사용자가 요청했다. Notion rich text 한 덩어리 한도(2000자) 안이라 저장 방식은 바뀌지 않는다.
+- 검토한 대안: 없음.
+- 바뀐 곳: 문서 `server-actions.md` 6-1, `notion-setup.md`(Notes 스키마, API 제한 표), `Prototype.dc.html`(`writing` 모달, `onDraft`). 코드 `lib/schema.ts`, `components/WriteDialog.tsx`. 로드맵 Phase 4 작성 모달 줄.
