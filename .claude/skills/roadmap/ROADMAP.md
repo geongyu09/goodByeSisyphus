@@ -63,6 +63,7 @@
 - [x] 첫 쓰기 뒤 `router.refresh()`로 `myKey` 다시 받기 — 근거: `.claude/skills/spec/references/ui.md#7-2-클라이언트-컴포넌트에서-낙관적-업데이트`
 - [x] 스티커 액션의 캐시 무효화를 `updateTag('board')`로 바꾸고, 붙이기 → 바로 옮기기 → 바로 떼기 뒤 Notion에 행이 남지 않는지 확인(D-14) — 근거: `.claude/skills/spec/references/server-actions.md#6-2-액션`
 - [x] 시크릿 창 두 개로 "내 스티커만 뗄 수 있는지" 확인(다른 작성자 쿠키로 Server Action을 직접 호출해 확인) — 근거: `.claude/skills/spec/references/dev-order-and-limits.md#10-개발-순서-제안`
+- [x] `app/actions.ts`: `removeNote`와 읽기 모달의 "내 메모 지우기"(한 번 더 눌러 확인, D-17, D-18), 다른 작성자 쿠키로는 지워지지 않는지 확인 — 근거: `.claude/skills/spec/references/server-actions.md#6-2-액션`, `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`
 - [x] 보안 체크리스트 점검(`server-only`, 액션 검증, `dangerouslySetInnerHTML` 미사용) — 근거: `.claude/skills/spec/references/security.md#8-보안-체크리스트`
 
 ## Phase 5: 배포와 전달

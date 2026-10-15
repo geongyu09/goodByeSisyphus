@@ -72,3 +72,12 @@ export async function removeSticker(raw: unknown) {
   await notion.pages.update({ page_id: mine.pageId, in_trash: true });
   updateTag('board');
 }
+
+export async function removeNote(raw: unknown) {
+  const authorKey = await guard();
+  const noteId = NoteIdInput.parse(raw);
+  const note = (await getBoard()).find((n) => n.id === noteId);
+  if (note?.authorKey !== authorKey) throw new Error('지울 수 있는 내 메모가 없습니다.');
+  await notion.pages.update({ page_id: noteId, in_trash: true });
+  updateTag('board');
+}

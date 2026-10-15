@@ -1,3 +1,4 @@
+import { useState, useTransition } from 'react';
 import type { Note } from '@/lib/board';
 import { COLORS } from '@/lib/stickers';
 import { notePin } from '@/lib/visual';
@@ -5,16 +6,35 @@ import { PlacedSticker } from './NoteCard';
 
 const navButton = { minHeight: 48, padding: '0 18px', border: 0, borderRadius: 999, background: '#FFFDF7', color: '#2B1D10', fontSize: 15, cursor: 'pointer' };
 
-export default function ReadDialog({ note, pos, total, onPrev, onNext, onClose }: {
+export default function ReadDialog({ note, pos, total, onPrev, onNext, onClose, onDelete }: {
   note: Note;
   pos: number;
   total: number;
   onPrev: () => void;
   onNext: () => void;
   onClose: () => void;
+  onDelete?: () => Promise<void>; // 내 메모일 때만 넘어온다
 }) {
   const c = COLORS[note.color] ?? COLORS[0];
   const count = note.stickers.length;
+  const [confirming, setConfirming] = useState(false);
+  const [error, setError] = useState('');
+  const [deleting, startDelete] = useTransition();
+
+  const onDeleteClick = () => {
+    if (deleting || !onDelete) return;
+    if (!confirming) return setConfirming(true);
+    setError('');
+    startDelete(async () => {
+      try {
+        await onDelete();
+      } catch {
+        setError('메모를 지우지 못했어요. 잠시 후 다시 시도해 주세요.');
+      }
+    });
+  };
+  let deleteLabel = confirming ? '한 번 더 누르면 지워져요' : '내 메모 지우기';
+  if (deleting) deleteLabel = '지우는 중…';
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 40, background: 'rgba(30,18,6,0.65)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 28, boxSizing: 'border-box', overflowY: 'auto' }}>
       <div role="dialog" aria-modal="true" aria-label="메모 자세히 보기" style={{ width: '100%', maxWidth: 560, margin: 'auto', display: 'flex', flexDirection: 'column', gap: 16 }}>
@@ -33,6 +53,12 @@ export default function ReadDialog({ note, pos, total, onPrev, onNext, onClose }
           <p style={{ margin: 0, color: '#FFF6E8', fontSize: 15 }}>{pos} / {total}</p>
           <button type="button" onClick={onNext} style={navButton}>다음 메모</button>
         </div>
+        {onDelete && (
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+            <button type="button" onClick={onDeleteClick} style={{ ...navButton, minHeight: 44, border: '1px solid #FFF6E8', background: confirming ? '#B23A0A' : 'transparent', color: '#FFF6E8' }}>{deleteLabel}</button>
+            <p aria-live="polite" style={{ margin: 0, color: '#FFF6E8', fontSize: 14, textAlign: 'center' }}>{error || (confirming ? '지운 메모는 되돌릴 수 없어요.' : '')}</p>
+          </div>
+        )}
       </div>
     </div>
   );

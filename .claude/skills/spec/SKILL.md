@@ -16,7 +16,7 @@ description: 코치님 롤링페이퍼의 기획/설계 문서(SSOT). 기능 명
 | `references/nextjs-setup.md` | 생성 명령, 패키지, 환경 변수, `next.config.ts`, 폴더 구조 | 프로젝트 셋업, 새 파일 위치를 정할 때 |
 | `references/data-layer.md` | Notion 클라이언트와 재시도, 페이지네이션, 속성 도우미, `getBoard()` 캐시 | `lib/notion.ts`, `lib/board.ts` 작업 |
 | `references/identity-gate.md` | 작성자 키(쿠키·HMAC), 입장 코드 | `lib/identity.ts`, `lib/gate.ts`, "내 것" 판단과 접근 제한 |
-| `references/server-actions.md` | zod 입력 검증, `enterAction`·`addNote`·`placeSticker`·`removeSticker`, 캐시 무효화 | `app/actions.ts`, `lib/schema.ts` 작업 |
+| `references/server-actions.md` | zod 입력 검증, `enterAction`·`addNote`·`placeSticker`·`removeSticker`·`removeNote`, 캐시 무효화 | `app/actions.ts`, `lib/schema.ts` 작업 |
 | `references/ui.md` | 페이지와 Suspense, 낙관적 업데이트, 프로토타입 → Next.js 대응표, `lib/visual.ts`, 폰트 | 화면 컴포넌트 작업 |
 | `references/Prototype.dc.html` | 코르크보드 프로토타입 원본: 마크업·스타일·문구, 스티커 8종 SVG, 메모 색 4종, `renderVals` 상호작용 로직 | 화면 모양·문구·동작을 확인할 때. `ui.md#7-3-프로토타입-로직-옮기기` 대응표와 함께 읽는다 |
 | `references/security.md` | 보안 체크리스트 | 액션을 추가·수정할 때, 배포 전 점검 |

@@ -1,7 +1,7 @@
 'use client';
 import { useOptimistic, useState, useTransition, type MouseEvent } from 'react';
 import { useRouter } from 'next/navigation';
-import { addNote, placeSticker, removeSticker } from '@/app/actions';
+import { addNote, placeSticker, removeSticker, removeNote } from '@/app/actions';
 import type { Note } from '@/lib/board';
 import { STICKERS } from '@/lib/stickers';
 import NoteCard, { type Mode } from './NoteCard';
@@ -12,11 +12,12 @@ import StickerDock from './StickerDock';
 const PAGE_SIZE = 30; // D-8
 
 type StickerDraft = { noteId: string; type: number; x: number; y: number; rot: number };
-type Action = { kind: 'note'; note: Note } | { kind: 'place'; s: StickerDraft } | { kind: 'remove'; noteId: string };
+type Action = { kind: 'note'; note: Note } | { kind: 'place'; s: StickerDraft } | { kind: 'remove'; noteId: string } | { kind: 'delete'; noteId: string };
 
 // 여러 번 적용해도 결과가 같아서, 서버 데이터가 내 쓰기를 따라잡은 뒤에도 겹치지 않는다.
 function apply(notes: Note[], a: Action, me: string): Note[] {
   if (a.kind === 'note') return notes.some((n) => n.id === a.note.id) ? notes : [a.note, ...notes];
+  if (a.kind === 'delete') return notes.filter((n) => n.id !== a.noteId);
   const noteId = a.kind === 'place' ? a.s.noteId : a.noteId;
   return notes.map((n) => n.id !== noteId ? n : {
     ...n,
@@ -126,6 +127,14 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
       had ? '이미 붙인 스티커를 새 위치로 옮겼어요. 한 장에는 한 개만 붙일 수 있어요.' : `${n.nick}님 메모에 ${STICKERS[tool].label} 스티커를 붙였어요.`);
   };
 
+  // 되돌릴 수 없는 쓰기라 낙관적 업데이트 없이, 끝난 뒤에 보드에서 뺀다 (D-17). 실패는 ReadDialog가 보여 준다.
+  const deleteNote = async (id: string) => {
+    await removeNote(id);
+    setOpenId(null);
+    setJustAdded((j) => (j === id ? null : j));
+    setSaved((l) => [...l, { kind: 'delete', noteId: id }]);
+  };
+
   const onSubmit = () => {
     const input = draft;
     const note: Note = { id: `pending-${Date.now()}`, nick: input.nick.trim(), msg: input.msg.trim(), color: input.color, authorKey: me, createdAt: new Date().toISOString(), stickers: [] };
@@ -168,7 +177,7 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
           <div aria-hidden="true" style={{ position: 'absolute', top: -12, right: 44, width: 110, height: 30, background: 'rgba(255,232,160,0.85)', transform: 'rotate(5deg)' }} />
           <p style={{ margin: '0 0 8px', fontSize: 18, color: '#7A5A3A' }}>시지프에게</p>
           <h1 style={{ margin: 0, fontFamily: 'var(--font-title), cursive', fontWeight: 700, fontSize: 60, lineHeight: 1.15, color: '#2B1D10' }}>그동안 정말<br />고마웠어요</h1>
-          <p style={{ margin: '18px auto 0', maxWidth: 520, fontSize: 17, lineHeight: 1.7, color: '#4A3826' }}>함께한 8개월 동안 받은 피드백과 응원을 한 장씩 적어 보드에 붙였어요. 새로운 곳에서 시작하는 다음 여정도 크루 모두가 응원할게요.</p>
+          <p style={{ margin: '18px auto 0', maxWidth: 520, fontSize: 17, lineHeight: 1.7, color: '#4A3826' }}>함께한 8개월 동안 정말 많이 배웠어요! 떠나는 길에 응원 한 장씩 적어 보드에 붙였어요! 새로운 곳에서 시작하는 다음 여정도 크루 모두가 응원할게요.</p>
           <p style={{ margin: '20px 0 0', fontFamily: 'var(--font-pen), cursive', fontSize: 28, color: '#B23A0A' }}>지금까지 붙은 메모 {notes.length}장 · 스티커 {stickerTotal}개</p>
         </div>
       </section>
@@ -249,7 +258,8 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
       <StickerDock mode={mode} tool={tool} lastAction={lastAction} onOff={() => pickMode('off')} onPick={(i) => pickMode('place', i)} onErase={() => pickMode('erase')} />
 
       {openIdx >= 0 && (
-        <ReadDialog note={navList[openIdx]} pos={openIdx + 1} total={navList.length} onPrev={() => go(-1)} onNext={() => go(1)} onClose={() => setOpenId(null)} />
+        <ReadDialog key={navList[openIdx].id} note={navList[openIdx]} pos={openIdx + 1} total={navList.length} onPrev={() => go(-1)} onNext={() => go(1)} onClose={() => setOpenId(null)}
+          onDelete={navList[openIdx].authorKey === me && !navList[openIdx].id.startsWith('pending-') ? () => deleteNote(navList[openIdx].id) : undefined} />
       )}
       {writing && <WriteDialog draft={draft} onChange={setDraft} error={writeError} onSubmit={onSubmit} onClose={() => setWriting(false)} />}
     </div>

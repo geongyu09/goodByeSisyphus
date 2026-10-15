@@ -8,7 +8,7 @@
 
 ```
 [브라우저: React 클라이언트 컴포넌트]
-        │  Server Action 호출 (메모 쓰기, 스티커 붙이기·떼기)
+        │  Server Action 호출 (메모 쓰기·지우기, 스티커 붙이기·떼기)
         ▼
 [Next.js 서버 (Vercel 배포 시 서버리스 함수)]
         │  NOTION_TOKEN은 서버 환경 변수에만 존재
