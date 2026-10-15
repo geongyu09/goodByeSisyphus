@@ -69,10 +69,10 @@
 목표: Vercel에 배포하고 실제 환경에서 캐시와 요청 한도를 확인한 뒤 코치님께 전달한다.
 완료 조건: Production URL에서 쓴 메모가 다른 브라우저에서도 보인다. 크루 여러 명이 동시에 스티커를 붙여도 요청이 실패하지 않는다(429는 재시도로 처리). 전달 당일 공개 범위 조정 방법이 준비되어 있다.
 
-- [ ] (사용자) GitHub 저장소를 만들어 Vercel에 연결 — 근거: `.claude/skills/spec/references/deploy.md#vercel`
-- [ ] (사용자) Vercel 환경 변수 등록 — 근거: `.claude/skills/spec/references/deploy.md#vercel`, `.claude/skills/spec/references/nextjs-setup.md#3-2-환경-변수-envlocal`
-- [ ] 배포 뒤 메모를 써서 다른 브라우저에서 보이는지 확인 — 근거: `.claude/skills/spec/references/dev-order-and-limits.md#10-개발-순서-제안`
-- [ ] 크루 몇 명과 동시에 스티커를 붙여 보며 429 로그 확인 — 근거: `.claude/skills/spec/references/dev-order-and-limits.md#10-개발-순서-제안`, `.claude/skills/spec/references/notion-setup.md#2-4-notion-api-제한`, `.claude/skills/spec/references/dev-order-and-limits.md#11-알려진-한계`
+- [x] (사용자) GitHub 저장소를 만들어 Vercel에 연결(사용자 승인으로 Claude가 진행: 공개 저장소 `geongyu09/goodByeSisyphus`, Vercel 프로젝트 `goodbyesisyphus`) — 근거: `.claude/skills/spec/references/deploy.md#vercel`
+- [x] (사용자) Vercel 환경 변수 등록(Production, Secret) — 근거: `.claude/skills/spec/references/deploy.md#vercel`, `.claude/skills/spec/references/nextjs-setup.md#3-2-환경-변수-envlocal`
+- [x] 배포 뒤 메모를 써서 다른 브라우저에서 보이는지 확인(작성자 쿠키가 다른 두 클라이언트로 확인) — 근거: `.claude/skills/spec/references/dev-order-and-limits.md#10-개발-순서-제안`
+- [x] 크루 몇 명과 동시에 스티커를 붙여 보며 429 로그 확인(작성자 15명 동시 요청으로 대신 확인: 15건 모두 200, Vercel 런타임 오류 로그 0건) — 근거: `.claude/skills/spec/references/dev-order-and-limits.md#10-개발-순서-제안`, `.claude/skills/spec/references/notion-setup.md#2-4-notion-api-제한`, `.claude/skills/spec/references/dev-order-and-limits.md#11-알려진-한계`
 - [ ] (사용자) 전달 당일: 입장 코드 전달 또는 `BOARD_PASSCODE` 교체 후 재배포, Notes 데이터베이스 기념본 복제 — 근거: `.claude/skills/spec/references/dev-order-and-limits.md#10-개발-순서-제안`, `.claude/skills/spec/references/identity-gate.md#5-2-입장-코드-libgatets`
 
 ## 미결정 사항
