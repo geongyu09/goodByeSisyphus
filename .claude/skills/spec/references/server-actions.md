@@ -30,7 +30,7 @@ export const PasscodeInput = z.string().trim().min(1).max(100);
 
 ```ts
 'use server';
-import { revalidateTag, updateTag } from 'next/cache';
+import { updateTag } from 'next/cache';
 import { notion } from '@/lib/notion';
 import { getBoard } from '@/lib/board';
 import { ensureAuthorKey } from '@/lib/identity';
@@ -91,7 +91,7 @@ export async function placeSticker(raw: unknown) {
       },
     });
   }
-  revalidateTag('board', 'max'); // 자주 일어나는 쓰기라 백그라운드 재조회로 처리
+  updateTag('board'); // 곧바로 옮기거나 뗄 때 액션이 새 보드에서 내 스티커를 찾도록 즉시 무효화
 }
 
 export async function removeSticker(raw: unknown) {
@@ -101,11 +101,12 @@ export async function removeSticker(raw: unknown) {
   const mine = board.find((n) => n.id === noteId)?.stickers.find((k) => k.authorKey === authorKey);
   if (!mine) return;
   await notion.pages.update({ page_id: mine.pageId, in_trash: true });
-  revalidateTag('board', 'max');
+  updateTag('board');
 }
 ```
 
-- `updateTag(tag)`는 Server Action 안에서만 쓸 수 있고 다음 조회가 곧바로 새 데이터를 가져오게 하므로, 드물게 일어나는 메모 작성에 맞습니다.
-- `revalidateTag(tag, 'max')`는 재조회가 백그라운드에서 끝날 때까지 이전 데이터를 보여 주기 때문에, 스티커처럼 자주 일어나는 쓰기가 몰려도 Notion 조회가 매번 일어나지 않습니다. Next.js 16부터 `revalidateTag`는 두 번째 인자(캐시 프로필)를 받습니다.
-- 스티커 액션은 Notion을 조회하지 않고 캐시된 보드에서 내 스티커의 `pageId`를 찾기 때문에, 쓰기 한 번에 Notion 요청이 한 번만 일어납니다. 캐시가 늦어서 같은 key의 스티커가 두 번 저장되더라도 4-4의 중복 제거가 최신 것 하나만 보여 줍니다.
+- `updateTag(tag)`는 Server Action 안에서만 쓸 수 있고, 다음 조회가 이전 데이터를 쓰지 않고 새 데이터를 가져오게 합니다. 메모와 스티커 쓰기 모두 이것을 씁니다.
+- 스티커 액션은 캐시된 보드에서 내 스티커의 `pageId`를 찾으므로, 캐시가 이전 데이터를 돌려주면 안 됩니다. `revalidateTag(tag, 'max')`를 쓰면 쓰기 뒤 첫 조회가 이전 데이터를 받기 때문에, 붙인 직후 옮기면 같은 key 행이 하나 더 생기고, 떼면 그중 하나만 휴지통으로 가서 새로고침 뒤 스티커가 되살아납니다.
+- Notion 재조회 횟수는 `revalidateTag(tag, 'max')`와 거의 같습니다. 두 방식 모두 쓰기 뒤 첫 조회 때 한 번 다시 불러오고, 그사이 쓰기가 몰리면 한 번으로 합쳐집니다. 차이는 쓰기 직후 첫 조회가 새 데이터를 기다리느냐(`updateTag`), 이전 데이터를 먼저 받느냐(`revalidateTag`)입니다.
+- 스티커 액션 안에서는 Notion 쓰기 요청이 한 번만 일어납니다. 바로 앞의 쓰기로 캐시가 무효화되어 있으면 그 전에 보드 조회가 먼저 일어납니다. 같은 사람이 액션이 끝나기 전에 연달아 누르면 같은 key의 스티커가 두 번 저장될 수 있으며, 4-4의 중복 제거가 그중 하나만 보여 줍니다.
 - 휴지통으로 보내는 속성 이름은 API 버전에 따라 `in_trash` 또는 `archived`이므로, 사용하는 SDK의 타입 정의를 확인하시기 바랍니다.

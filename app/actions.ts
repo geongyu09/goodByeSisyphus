@@ -1,5 +1,5 @@
 'use server';
-import { revalidateTag, updateTag } from 'next/cache';
+import { updateTag } from 'next/cache';
 import { notion } from '@/lib/notion';
 import { getBoard } from '@/lib/board';
 import { ensureAuthorKey } from '@/lib/identity';
@@ -60,7 +60,7 @@ export async function placeSticker(raw: unknown) {
       },
     });
   }
-  revalidateTag('board', 'max'); // 자주 일어나는 쓰기라 백그라운드 재조회로 처리
+  updateTag('board'); // 곧바로 옮기거나 뗄 때 액션이 새 보드에서 내 스티커를 찾도록 즉시 무효화
 }
 
 export async function removeSticker(raw: unknown) {
@@ -70,5 +70,5 @@ export async function removeSticker(raw: unknown) {
   const mine = board.find((n) => n.id === noteId)?.stickers.find((k) => k.authorKey === authorKey);
   if (!mine) return;
   await notion.pages.update({ page_id: mine.pageId, in_trash: true });
-  revalidateTag('board', 'max');
+  updateTag('board');
 }

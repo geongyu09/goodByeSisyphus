@@ -29,36 +29,45 @@ async function BoardLoader() {
 
 ### 7-2. 클라이언트 컴포넌트에서 낙관적 업데이트
 
-캐시 때문에 서버 데이터가 최대 수십 초 늦을 수 있으므로, 사용자가 붙인 메모와 스티커는 `useOptimistic`으로 화면에 먼저 반영하고 Server Action은 뒤에서 처리합니다.
+캐시 때문에 서버 데이터가 늦을 수 있으므로, 사용자가 붙인 메모와 스티커는 `useOptimistic`으로 화면에 먼저 반영하고 Server Action은 뒤에서 처리합니다. `useOptimistic` 값은 액션이 끝나면 원래 값으로 돌아가고 Notion 조회는 방금 쓴 내용을 늦게 돌려줄 수 있으므로, 성공한 쓰기는 클라이언트 상태에 쌓아 서버 데이터 위에 다시 적용합니다. 적용 함수는 여러 번 적용해도 결과가 같아서, 서버 데이터가 따라잡아도 겹치지 않습니다. 쌓은 쓰기는 새로고침하면 사라집니다.
 
 ```tsx
 'use client';
-import { useOptimistic, useTransition } from 'react';
+import { useOptimistic, useState, useTransition } from 'react';
 import { placeSticker } from '@/app/actions';
 import type { Note } from '@/lib/board';
 
-export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; myKey: string | null }) {
-  const [isPending, startTransition] = useTransition();
-  const [notes, applySticker] = useOptimistic(
-    initialNotes,
-    (state, s: { noteId: string; type: number; x: number; y: number; rot: number }) =>
-      state.map((n) =>
-        n.id !== s.noteId ? n : {
-          ...n,
-          stickers: [
-            ...n.stickers.filter((k) => k.authorKey !== myKey),
-            { ...s, pageId: 'pending', authorKey: myKey ?? 'me', editedAt: new Date().toISOString() },
-          ],
-        },
-      ),
+type StickerDraft = { noteId: string; type: number; x: number; y: number; rot: number };
+
+// 같은 쓰기를 여러 번 적용해도 결과가 같습니다.
+const apply = (state: Note[], s: StickerDraft, me: string) =>
+  state.map((n) =>
+    n.id !== s.noteId ? n : {
+      ...n,
+      stickers: [
+        ...n.stickers.filter((k) => k.authorKey !== me),
+        { ...s, pageId: 'pending', authorKey: me, editedAt: '' },
+      ],
+    },
   );
 
-  const onPlace = (s: { noteId: string; type: number; x: number; y: number; rot: number }) =>
+export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; myKey: string | null }) {
+  const me = myKey ?? 'me';
+  const [, startTransition] = useTransition();
+  const [saved, setSaved] = useState<StickerDraft[]>([]);
+  const [notes, applySticker] = useOptimistic(
+    saved.reduce((state, s) => apply(state, s, me), initialNotes),
+    (state: Note[], s: StickerDraft) => apply(state, s, me),
+  );
+
+  const onPlace = (s: StickerDraft) =>
     startTransition(async () => {
       applySticker(s);
       await placeSticker(s);
+      startTransition(() => setSaved((list) => [...list, s]));
     });
 
+  // 메모 작성과 스티커 떼기도 같은 방식으로 처리합니다.
   // 검색, 정렬, 더 보기, 읽기 모달, 작성 모달은 프로토타입의 renderVals 로직을 useState와 useMemo로 옮깁니다.
   return null;
 }
@@ -72,7 +81,7 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
 | --- | --- |
 | `this.state`의 `query`, `sort`, `shown`, `openId`, `writing`, `mode`, `tool` | 클라이언트 컴포넌트의 `useState`로 옮깁니다 |
 | `base(count)`가 만드는 테스트 메모 | `getBoard()`가 돌려주는 실제 데이터로 바꿉니다 |
-| `added`, `placed` (로컬에만 있던 내 메모와 스티커) | `useOptimistic`과 Server Action으로 바꿉니다 |
+| `added`, `placed` (로컬에만 있던 내 메모와 스티커) | `useOptimistic`과 Server Action, 성공한 쓰기를 다시 적용하는 클라이언트 상태(7-2)로 바꿉니다 |
 | "붙이는 사람" 선택 상자 (`나`, `크루 A`, `크루 B`) | 테스트용이므로 지우고, `myKey`로 내 스티커를 구분합니다 |
 | `justAdded`와 "방금 붙인 메모" 배지 | 프로토타입처럼 이번에 작성한 메모 한 장에만 클라이언트 상태로 표시하고, 새로고침하면 사라집니다 |
 | 읽기 모달 `stickerSummary`의 붙인 사람 닉네임 목록 | Stickers에는 닉네임이 없으므로 "스티커 N개" 또는 "아직 붙은 스티커가 없어요."처럼 개수만 표시합니다 |
