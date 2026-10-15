@@ -246,7 +246,7 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
           </div>
         )}
 
-        <div style={{ marginTop: 32, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '44px 32px' }}>
+        <div className="notes" style={{ marginTop: 32, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: '44px 32px' }}>
           {visible.map((n) => <NoteCard key={n.id} note={n} me={me} mode={mode} isNew={n.id === justAdded} onClick={onNote(n)} />)}
         </div>
 
