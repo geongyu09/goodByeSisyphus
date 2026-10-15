@@ -141,6 +141,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 | Noto Sans KR Google Fonts 링크 | `next/font/google`의 `Noto_Sans_KR`(400·500·700·800, `preload: false`)로 불러옵니다 |
 | `<style>`의 규칙 | `components/Story.css`에 두되, 보드에 새지 않게 `.story`와 `html:has(.story)` 아래로 한정합니다. 모든 링크에 색이 따로 있어 효과가 없는 `a` 색 규칙과 쓰이지 않는 `.xwrap`, `.xfade`, `.xfade-out`은 옮기지 않습니다 |
 | 오른쪽 점 메뉴의 링크 9개 | 시안에 있는 섹션(오프닝, 처음 만난 날, 웃는 얼굴, 숫자로 보는 시간, 단체 사진, 롤링페이퍼로)만 화면 순서대로 둡니다. 없는 섹션(`s6`~`s8`)으로 가는 점은 뺍니다. 점의 기본 모양과 760px 이하에서 숨기기는 CSS로 옮겨, 인라인 스타일에 막혀 있던 hover 색과 미디어 쿼리가 적용되게 합니다 |
+| 오프닝 영상의 `.grow`(0.84배에서 1배로 커짐) | 영상이 화면 세로 가운데에 고정된 채, 스크롤 1화면 동안 좌우가 화면 끝에 닿을 때까지 커진 뒤 다음 섹션이 올라옵니다(D-25). 스크롤 기반 애니메이션을 지원하지 않거나 동작 줄이기 설정이면 고정 없이 최대 1080px로 둡니다 |
 | `heroRef`로 영상 재생 | `autoPlay`, `muted`, `loop`, `playsInline` 속성으로 대신합니다 |
 | `<title>시지프에게 드리는 발표</title>` | `app/page.tsx`의 `metadata.title`로 둡니다 |
 

@@ -4,10 +4,20 @@ html:has(.story) { scroll-behavior: smooth; scroll-snap-type: y proximity; }
 @keyframes story-rise { from { opacity: 0; transform: translateY(56px); } to { opacity: 1; transform: none; } }
 @keyframes story-grow { from { transform: scale(0.84); border-radius: 36px; } to { transform: scale(1); border-radius: 12px; } }
 @keyframes story-zoomout { from { transform: scale(1.12); } to { transform: scale(1); } }
+/* 48px = #s1 좌우 padding. 그만큼 넘쳐야 화면 끝에 닿는다 */
+@keyframes story-hero { from { border-radius: 12px; } to { width: calc(100% + 48px); max-width: calc(100% + 48px); border-radius: 0; } }
+.story .hero-track { align-self: stretch; margin-top: 56px; }
 @supports (animation-timeline: view()) {
   .story .reveal { animation: story-rise linear both; animation-timeline: view(); animation-range: entry 0% cover 30%; }
   .story .grow { animation: story-grow linear both; animation-timeline: view(); animation-range: entry 10% cover 50%; }
   .story .zoom { animation: story-zoomout linear both; animation-timeline: view(); animation-range: entry 0% cover 60%; }
+  /* 오프닝 영상: 화면 가운데 고정된 채 1화면 스크롤 동안 화면 너비까지 커진다 (D-25) */
+  @media (prefers-reduced-motion: no-preference) {
+    /* 영상이 고정될 때 가운데로 오면서 생기는 위 여백을 빼서 처음 보이는 위치를 그대로 둔다 */
+    .story .hero-track { height: 200vh; margin-top: calc(56px - (100vh - min(1080px, 100%) * 9 / 16) / 2); view-timeline-name: --hero; }
+    .story .hero-stage { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .story .hero { flex: none; animation: story-hero linear both; animation-timeline: --hero; animation-range: contain; }
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .story .reveal, .story .grow, .story .zoom { animation: none; }

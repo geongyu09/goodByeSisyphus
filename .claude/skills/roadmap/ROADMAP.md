@@ -39,7 +39,7 @@
 - [x] `components/ReadDialog.tsx`: 읽기 모달(이전/다음, 위치 표시, 닫기), "한 장 뽑아 읽기", 스티커 개수 요약 — 근거: `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`, `.claude/skills/spec/references/Prototype.dc.html` (`hasOpen` 모달)
 - [x] `app/rolling-paper/page.tsx`(D-24 전 `app/page.tsx`): `Suspense`와 `BoardLoader`로 `getBoard()` 결과를 `Board`에 전달(입장 확인과 `myKey`는 Phase 3에서 연결) — 근거: `.claude/skills/spec/references/ui.md#7-1-페이지`
 - [x] "PDF로 저장" 버튼: 인쇄할 때 모든 메모를 전문으로 그리고 버튼·도구·모달을 빼기, 메모를 세로 단으로 이어 붙이기(D-20, D-21, D-22) — 근거: `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`
-- [x] `app/page.tsx`, `components/Story.tsx`: `/`에 프레젠테이션, 보드는 `/rolling-paper`로 옮기기(D-24) — 근거: `.claude/skills/spec/references/ui.md#7-5-프레젠테이션`, `.claude/skills/spec/references/Story.dc.html`
+- [x] `app/page.tsx`, `components/Story.tsx`: `/`에 프레젠테이션, 보드는 `/rolling-paper`로 옮기기(D-24, 오프닝 영상 고정·확대 D-25) — 근거: `.claude/skills/spec/references/ui.md#7-5-프레젠테이션`, `.claude/skills/spec/references/Story.dc.html`
 
 ## Phase 3: 작성자 식별과 입장 코드
 목표: 로그인 없이 브라우저마다 작성자 키를 발급하고, 입장 코드를 확인한 브라우저만 보드를 볼 수 있게 한다.

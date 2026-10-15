@@ -50,8 +50,12 @@ export default function Story() {
         <p className="reveal" style={{ ...pill, background: '#04201C', fontSize: 17, color: '#10E9CC' }}>8기 프론트엔드 크루가 준비한 작은 선물</p>
         <h1 className="reveal" style={{ margin: '16px 0 0', fontSize: 'clamp(48px, 8vw, 104px)', lineHeight: 1.05, fontWeight: 800, letterSpacing: '-0.03em' }}>고마워요,<br />시지프!</h1>
         <p className="reveal" style={{ margin: '24px 0 0', maxWidth: 620, fontSize: 'clamp(19px, 2vw, 24px)', lineHeight: 1.5, color: '#0A4A42' }}>함께한 시간을 천천히 돌아봅니다.</p>
-        <div className="grow" style={{ marginTop: 56, width: '100%', maxWidth: 1080, aspectRatio: '16 / 9', background: '#04201C', overflow: 'hidden', boxShadow: '0 30px 60px rgba(4,32,28,0.35)' }}>
-          <video src="/story/hero.mp4" poster="/story/hero-poster.jpg" autoPlay muted loop playsInline aria-label="크루들이 강의실에 모여 있는 장면" style={cover} />
+        <div className="hero-track">
+          <div className="hero-stage">
+            <div className="hero" style={{ width: '100%', maxWidth: 1080, margin: '0 auto', aspectRatio: '16 / 9', background: '#04201C', overflow: 'hidden', boxShadow: '0 30px 60px rgba(4,32,28,0.35)' }}>
+              <video src="/story/hero.mp4" poster="/story/hero-poster.jpg" autoPlay muted loop playsInline aria-label="크루들이 강의실에 모여 있는 장면" style={cover} />
+            </div>
+          </div>
         </div>
         <p style={{ margin: '40px 0 0', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, fontSize: 14, fontWeight: 500, color: '#0A4A42' }}>
           아래로 스크롤<svg {...arrow} strokeWidth={2}><path d="m6 9 6 6 6-6" /></svg>
