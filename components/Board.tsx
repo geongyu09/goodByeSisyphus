@@ -166,7 +166,7 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
         <div style={{ position: 'relative', background: '#FFFDF7', maxWidth: 760, width: '100%', padding: '48px 40px 36px', boxSizing: 'border-box', transform: 'rotate(-1deg)', boxShadow: '0 18px 30px rgba(40,20,5,0.35)', textAlign: 'center' }}>
           <div aria-hidden="true" style={{ position: 'absolute', top: -14, left: 40, width: 110, height: 30, background: 'rgba(255,232,160,0.85)', transform: 'rotate(-6deg)' }} />
           <div aria-hidden="true" style={{ position: 'absolute', top: -12, right: 44, width: 110, height: 30, background: 'rgba(255,232,160,0.85)', transform: 'rotate(5deg)' }} />
-          <p style={{ margin: '0 0 8px', fontSize: 18, color: '#7A5A3A' }}>시지프 코치님께</p>
+          <p style={{ margin: '0 0 8px', fontSize: 18, color: '#7A5A3A' }}>시지프에게</p>
           <h1 style={{ margin: 0, fontFamily: 'var(--font-title), cursive', fontWeight: 700, fontSize: 60, lineHeight: 1.15, color: '#2B1D10' }}>그동안 정말<br />고마웠어요</h1>
           <p style={{ margin: '18px auto 0', maxWidth: 520, fontSize: 17, lineHeight: 1.7, color: '#4A3826' }}>함께한 8개월 동안 받은 피드백과 응원을 한 장씩 적어 보드에 붙였어요. 새로운 곳에서 시작하는 다음 여정도 크루 모두가 응원할게요.</p>
           <p style={{ margin: '20px 0 0', fontFamily: 'var(--font-pen), cursive', fontSize: 28, color: '#B23A0A' }}>지금까지 붙은 메모 {notes.length}장 · 스티커 {stickerTotal}개</p>
