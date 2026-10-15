@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useOptimistic, useState, useTransition, type MouseEvent } from 'react';
 import { flushSync } from 'react-dom';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { addNote, placeSticker, removeSticker, removeNote } from '@/app/actions';
 import type { Note } from '@/lib/board';
@@ -181,7 +182,13 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
   return (
     <div style={{ minHeight: '100vh', padding: '0 0 200px' }}>
       <header style={{ maxWidth: 1160, margin: '0 auto', padding: '24px 24px 0', display: 'flex', flexWrap: 'wrap', gap: 16, justifyContent: 'space-between', alignItems: 'center' }}>
-        <p style={{ ...paperTag, padding: '8px 14px', fontSize: 15, color: '#2B1D10', boxShadow: '0 2px 0 rgba(0,0,0,0.15)' }}>우아한테크코스 8기 크루 일동</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 12 }}>
+          <Link href="/" className="no-print" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, minHeight: 44, padding: '0 18px 0 14px', borderRadius: 999, background: '#FFFDF7', color: '#2B1D10', textDecoration: 'none', fontSize: 15, boxShadow: '0 2px 0 rgba(0,0,0,0.15)' }}>
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5" /><path d="m11 18-6-6 6-6" /></svg>
+            처음 화면으로
+          </Link>
+          <p style={{ ...paperTag, padding: '8px 14px', fontSize: 15, color: '#2B1D10', boxShadow: '0 2px 0 rgba(0,0,0,0.15)' }}>우아한테크코스 8기 크루 일동</p>
+        </div>
         <div className="no-print" style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
           <button type="button" onClick={() => window.print()} style={{ minHeight: 44, padding: '0 20px', border: '1px solid #2B1D10', borderRadius: 999, background: '#FFFDF7', color: '#2B1D10', fontSize: 16, cursor: 'pointer' }}>PDF로 저장</button>
           <button type="button" onClick={openWrite} style={{ ...darkPill, minHeight: 44, padding: '0 20px' }}>{pencil}메시지 남기기</button>
