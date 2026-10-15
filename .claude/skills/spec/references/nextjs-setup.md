@@ -42,6 +42,7 @@ export default nextConfig;
 ```
 app/
   layout.tsx          # 폰트(Gaegu, Nanum Pen Script, Gowun Dodum) 적용
+  icon.png            # 파비콘. public/story/smile.jpg를 얼굴·상반신이 보이게 정사각형으로 자른 것(D-26)
   page.tsx            # 입장 확인 → 프레젠테이션(Story)
   rolling-paper/page.tsx  # 입장 확인 → 보드 데이터 + 내 작성자 키를 Board에 전달
   gate/page.tsx       # 입장 코드 입력 화면
