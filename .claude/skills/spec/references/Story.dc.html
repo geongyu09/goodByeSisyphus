@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>시지프에게 드리는 발표</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap">
+<style>
+body{margin:0}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity}
+a{color:#2F7BF6}a:hover{color:#1A5FD0}
+.slide{scroll-snap-align:start}
+.xwrap{view-timeline-name:--grp;view-timeline-axis:block}
+@keyframes rise{from{opacity:0;transform:translateY(56px)}to{opacity:1;transform:none}}
+@keyframes grow{from{transform:scale(0.84);border-radius:36px}to{transform:scale(1);border-radius:12px}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes fadeout{from{opacity:1}to{opacity:0}}
+@keyframes zoomout{from{transform:scale(1.12)}to{transform:scale(1)}}
+@supports (animation-timeline: view()){
+.reveal{animation:rise linear both;animation-timeline:view();animation-range:entry 0% cover 30%}
+.grow{animation:grow linear both;animation-timeline:view();animation-range:entry 10% cover 50%}
+.zoom{animation:zoomout linear both;animation-timeline:view();animation-range:entry 0% cover 60%}
+.xfade{animation:fadein linear both;animation-timeline:--grp;animation-range:contain 30% contain 60%}
+.xfade-out{animation:fadeout linear both;animation-timeline:--grp;animation-range:contain 30% contain 60%}
+}
+@supports not (animation-timeline: view()){.xfade-out{display:none}}
+@media (prefers-reduced-motion: reduce){.reveal,.grow,.zoom,.xfade,.xfade-out{animation:none}.xfade-out{display:none}html{scroll-behavior:auto}}
+.dots a:hover span,.dots a:focus-visible span{background:#FFFFFF;transform:scale(1.3)}
+a:focus-visible{outline:3px solid #10E9CC;outline-offset:3px}
+@media (max-width:760px){.dots{display:none}}
+</style>
+</helmet>
+<div id="top" style="background: #000000; color: #1D1D1F; font-family: 'Noto Sans KR', sans-serif">
+
+<nav aria-label="페이지 메뉴" style="position: sticky; top: 0; z-index: 30; background: rgba(16,233,204,0.86); backdrop-filter: saturate(180%) blur(16px); -webkit-backdrop-filter: saturate(180%) blur(16px); border-bottom: 1px solid rgba(4,32,28,0.12)">
+<div style="max-width: 1080px; margin: 0 auto; padding: 0 24px; min-height: 52px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<a href="#top" style="color: #04201C; text-decoration: none; font-weight: 800; font-size: 17px">Thank you, 시지프</a>
+<a href="Prototype.dc.html" style="display: inline-flex; align-items: center; min-height: 32px; padding: 0 14px; border-radius: 999px; background: #04201C; color: #10E9CC; text-decoration: none; font-size: 13px; font-weight: 700">롤링페이퍼 보기</a>
+</div>
+</nav>
+
+<nav class="dots" aria-label="슬라이드 이동" style="position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 25; display: flex; flex-direction: column; gap: 4px; padding: 8px 4px; border-radius: 999px; background: rgba(60,60,67,0.55)">
+<a href="#s1" aria-label="1. 오프닝" style="display: flex; width: 24px; height: 24px; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: transform 0.2s"></span></a>
+<a href="#s2" aria-label="2. 웃는 얼굴" style="display: flex; width: 24px; height: 24px; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: transform 0.2s"></span></a>
+<a href="#s3" aria-label="3. 처음 만난 날" style="display: flex; width: 24px; height: 24px; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: transform 0.2s"></span></a>
+<a href="#s4" aria-label="4. 숫자로 보는 시간" style="display: flex; width: 24px; height: 24px; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: transform 0.2s"></span></a>
+<a href="#s5" aria-label="5. 단체 사진" style="display: flex; width: 24px; height: 24px; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: transform 0.2s"></span></a>
+<a href="#s6" aria-label="6. 레벨마다" style="display: flex; width: 24px; height: 24px; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: transform 0.2s"></span></a>
+<a href="#s7" aria-label="7. 그날의 현장 영상" style="display: flex; width: 24px; height: 24px; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: transform 0.2s"></span></a>
+<a href="#s8" aria-label="8. 시지프 어록" style="display: flex; width: 24px; height: 24px; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: transform 0.2s"></span></a>
+<a href="#s9" aria-label="9. 롤링페이퍼로" style="display: flex; width: 24px; height: 24px; align-items: center; justify-content: center"><span style="width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.55); transition: transform 0.2s"></span></a>
+</nav>
+
+<section id="s1" class="slide" style="background: #10E9CC; color: #04201C; padding: 96px 24px 64px; display: flex; flex-direction: column; align-items: center; text-align: center">
+<p class="reveal" style="margin: 0; display: inline-flex; padding: 6px 16px; border-radius: 999px; background: #04201C; font-size: 17px; font-weight: 700; color: #10E9CC">8기 프론트엔드 크루가 준비한 작은 선물</p>
+<h1 class="reveal" style="margin: 16px 0 0; font-size: clamp(48px, 8vw, 104px); line-height: 1.05; font-weight: 800; letter-spacing: -0.03em">고마워요,<br>시지프!</h1>
+<p class="reveal" style="margin: 24px 0 0; max-width: 620px; font-size: clamp(19px, 2vw, 24px); line-height: 1.5; color: #0A4A42">함께한 시간을 천천히 돌아봅니다.</p>
+<div class="grow" style="margin-top: 56px; width: 100%; max-width: 1080px; aspect-ratio: 16 / 9; background: #04201C; overflow: hidden; box-shadow: 0 30px 60px rgba(4,32,28,0.35)">
+<video ref="{{heroRef}}" src="/_blob/da89f038bde135cd950b4e028d6ed0af" poster="/_blob/f044f93426411d26ff6ef4d08e8e4d53" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" aria-label="크루들이 강의실에 모여 있는 장면" style="display: block; width: 100%; height: 100%; object-fit: cover"></video>
+</div>
+<p style="margin: 40px 0 0; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: #0A4A42">아래로 스크롤<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></p>
+</section>
+
+
+
+
+
+<section id="s3" class="slide" style="color: #F5F5F7; padding: 120px 24px; box-sizing: border-box; background-color: #f5f5f7">
+<div style="max-width: 1080px; margin: 0 auto; display: flex; flex-wrap: wrap-reverse; align-items: center; gap: 56px">
+<div class="reveal" style="flex: 1 1 380px; min-width: 0; max-width: 460px; margin: 0 auto; border-radius: 24px; overflow: hidden; background: #1D1D1F; border: 1px solid #3A3A3C; box-shadow: 0 30px 60px rgba(0,0,0,0.5)">
+<div style="display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid #3A3A3C; font-size: 13px; color: #A1A1A6">
+<span aria-hidden="true" style="display: flex; gap: 6px"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FF5F57"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #FEBC2E"></span><span style="width: 10px; height: 10px; border-radius: 50%; background: #28C840"></span></span>
+<span style="flex: 1 1 auto; min-width: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">8기 입시 설명회 · 온라인</span>
+<span style="display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px; border-radius: 6px; background: #D92D20; color: #FFFFFF; font-size: 11px; font-weight: 700; letter-spacing: 0.06em"><span aria-hidden="true" style="width: 6px; height: 6px; border-radius: 50%; background: #FFFFFF"></span>LIVE</span>
+</div>
+<div style="position: relative; aspect-ratio: 4 / 5; background: #000000">
+<img class="zoom" src="/_blob/f4494db9242d4b70e50efb6a27a0d310" alt="8기 입시 설명회 온라인 화면 속에서 웃고 있는 시지프" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%">
+<span style="position: absolute; left: 14px; bottom: 14px; padding: 6px 12px; border-radius: 8px; background: rgba(0,0,0,0.62); color: #FFFFFF; font-size: 14px; font-weight: 500">시지프</span>
+</div>
+</div>
+<div style="flex: 1 1 380px; min-width: 0">
+<p class="reveal" style="margin: 0; display: inline-flex; padding: 6px 16px; border-radius: 999px; background: #10E9CC; font-size: 19px; font-weight: 700; color: #04201C">처음 시지프를 만난(?)날 · 25.09.24</p>
+<h2 class="reveal" style="margin: 14px 0 0; font-size: clamp(40px, 6vw, 76px); line-height: 1.1; font-weight: 800; letter-spacing: -0.03em; color: #2b1d10">처음 만난 건,<br>화면 너머였어요.</h2>
+<p class="reveal" style="margin: 28px 0 0; max-width: 460px; font-size: clamp(19px, 2vw, 22px); line-height: 1.6; color: #A1A1A6">8기 입시 설명회를 온라인으로 보던 날, 화면 속에서 웃고 있던 사람이 시지프였어요. 그때는 이렇게 오래 함께하게 될 줄 몰랐죠.</p>
+</div>
+</div>
+</section>
+
+<section id="s2" class="slide" style="background: #FFFFFF; padding: 120px 24px; box-sizing: border-box">
+<div style="max-width: 1080px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+<div style="flex: 1 1 360px; min-width: 0">
+<p class="reveal" style="margin: 0; display: inline-flex; padding: 6px 16px; border-radius: 999px; background: #10E9CC; font-size: 19px; font-weight: 700; color: #04201C">시지프</p>
+<h2 class="reveal" style="margin: 14px 0 0; font-size: clamp(40px, 6vw, 76px); line-height: 1.1; font-weight: 800; letter-spacing: -0.03em; color: #1D1D1F">늘 이렇게<br>웃어주셨죠.</h2>
+<p class="reveal" style="margin: 28px 0 0; max-width: 440px; font-size: clamp(19px, 2vw, 22px); line-height: 1.6; color: #6E6E73">언제나 열정적인 모습으로 .... 뭐라뭐라</p>
+</div>
+<div class="reveal" style="flex: 1 1 420px; min-width: 0; border-radius: 28px; overflow: hidden; aspect-ratio: 4 / 5; background: #F5F5F7">
+<img class="zoom" src="/_blob/3a1421eb42bc0612713c81ede7a854f3" alt="환하게 웃고 있는 시지프" style="display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%">
+</div>
+</div>
+</section><section id="s4" class="slide" style="background: #FFFFFF; min-height: clamp(640px, 100vh, 820px); padding: 120px 24px; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
+<div style="max-width: 1080px; width: 100%">
+<h2 class="reveal" style="margin: 0; font-size: clamp(36px, 5vw, 64px); line-height: 1.15; font-weight: 800; letter-spacing: -0.03em; color: #1D1D1F">함께한 시간을<br>숫자로 세어보면..</h2>
+<div style="margin-top: 56px; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px">
+<div class="reveal" style="background: #F5F5F7; border-radius: 24px; padding: 36px 32px"><p style="margin: 0; font-size: 17px; font-weight: 500; color: #6E6E73">함께한 날</p><p style="margin: 8px 0 0; font-size: 64px; line-height: 1; font-weight: 800; letter-spacing: -0.03em; color: #1D1D1F">138<span style="font-size: 28px; font-weight: 700">일</span></p></div>
+<div class="reveal" style="background: #F5F5F7; border-radius: 24px; padding: 36px 32px"><p style="margin: 0; font-size: 17px; font-weight: 500; color: #6E6E73">받은 미션 수</p><p style="margin: 8px 0 0; font-size: 64px; line-height: 1; font-weight: 800; letter-spacing: -0.03em; color: #1D1D1F">17<span style="font-size: 28px; font-weight: 700">번 ㅠㅠ</span></p></div>
+<div class="reveal" style="background: #F5F5F7; border-radius: 24px; padding: 36px 32px"><p style="margin: 0; font-size: 17px; font-weight: 500; color: #6E6E73">수업</p><p style="margin: 8px 0 0; font-size: 64px; line-height: 1; font-weight: 800; letter-spacing: -0.03em; color: #1D1D1F">30<span style="font-size: 28px; font-weight: 700">번</span></p></div>
+<div class="reveal" style="background: #1D1D1F; border-radius: 24px; padding: 36px 32px"><p style="margin: 0; font-size: 17px; font-weight: 500; color: #A1A1A6">함께한 FE 크루</p><p style="margin: 8px 0 0; font-size: 64px; line-height: 1; font-weight: 800; letter-spacing: -0.03em; color: #10E9CC">25<span style="font-size: 28px; font-weight: 700">명</span></p></div>
+</div>
+</div>
+</section>
+
+<section id="s5" class="slide" style="background: #000000; color: #F5F5F7; padding: 120px 24px; box-sizing: border-box">
+<div style="max-width: 1080px; width: 100%; margin: 0 auto">
+<h2 class="reveal" style="margin: 0; font-size: clamp(36px, 5vw, 64px); line-height: 1.15; font-weight: 800; letter-spacing: -0.03em">이만큼의 크루가<br>함께였습니다.</h2>
+<div class="grow" style="margin-top: 48px; aspect-ratio: 2000 / 1126; overflow: hidden; background: #1D1D1F">
+<img src="/_blob/26b156591ad0df08dbc86c3d81f4ad8d" alt="시지프와 크루들이 브이를 하며 찍은 단체 사진" style="display: block; width: 100%; height: 100%; object-fit: cover">
+</div>
+</div>
+</section>
+
+
+
+
+
+
+
+<section id="s9" class="slide" style="background: #000000; color: #F5F5F7; min-height: clamp(640px, 100vh, 820px); padding: 120px 24px 64px; box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center">
+<h2 class="reveal" style="margin: 0; font-size: clamp(44px, 7vw, 96px); line-height: 1.08; font-weight: 800; letter-spacing: -0.03em">시지프와 함께한 <br><span style="color: #0064FF">고마운 마음</span>을 담아봤어요</h2>
+<p class="reveal" style="margin: 24px 0 0; max-width: 560px; font-size: clamp(19px, 2vw, 24px); line-height: 1.5; color: #A1A1A6">크루가 한 장씩 붙인 메모가 기다리고 있어요.</p>
+<div class="reveal" style="margin-top: 44px; display: flex; flex-wrap: wrap; gap: 14px; justify-content: center">
+<a href="Prototype.dc.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 56px; padding: 0 32px; border-radius: 999px; background: #0064FF; color: #FFFFFF; text-decoration: none; font-size: 19px; font-weight: 800; box-shadow: 0 12px 32px rgba(0,100,255,0.45)">롤링페이퍼 보러 가기<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg></a>
+<a href="#top" style="display: inline-flex; align-items: center; min-height: 56px; padding: 0 28px; border-radius: 999px; border: 1px solid #48484A; color: #F5F5F7; text-decoration: none; font-size: 17px">처음부터 다시 보기</a>
+</div>
+<p style="margin: 96px 0 0; font-size: 13px; color: #86868B">8기 프론트엔드 크루 일동 · 26.10.16</p>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":8000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      heroRef: (el) => {
+        if (!el || el._started) return;
+        el._started = true;
+        el.muted = true;
+        const p = el.play && el.play();
+        if (p && p.catch) p.catch(() => {});
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

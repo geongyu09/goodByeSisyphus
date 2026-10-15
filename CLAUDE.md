@@ -13,7 +13,7 @@
 - 데이터 조회·캐시: `.claude/skills/spec/references/data-layer.md`
 - 작성자 키·입장 코드: `.claude/skills/spec/references/identity-gate.md`
 - Server Actions·입력 검증: `.claude/skills/spec/references/server-actions.md`
-- 화면: `.claude/skills/spec/references/ui.md`, 프로토타입 원본 `.claude/skills/spec/references/Prototype.dc.html`
+- 화면: `.claude/skills/spec/references/ui.md`, 프로토타입 원본 `.claude/skills/spec/references/Prototype.dc.html`, 프레젠테이션 원본 `.claude/skills/spec/references/Story.dc.html`
 - 보안: `.claude/skills/spec/references/security.md`
 - 배포: `.claude/skills/spec/references/deploy.md`
 - 개발 순서·한계·참고 링크: `.claude/skills/spec/references/dev-order-and-limits.md`

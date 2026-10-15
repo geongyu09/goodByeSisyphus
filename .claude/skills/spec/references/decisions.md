@@ -203,3 +203,11 @@
 - 이유: 사용자가 캔버스 디자인의 색에 맞춰 달라고 했다. 캔버스와 로컬 프로토타입의 색 차이는 이 배경뿐이었다.
 - 검토한 대안: 없음.
 - 바뀐 곳: 문서 `Prototype.dc.html`(배경 줄만). 코드 `app/globals.css`.
+
+### D-24. `/`에 프레젠테이션을 두고 보드를 `/rolling-paper`로 옮긴다 (2026-10-15)
+- 상태: 확정
+- 결정: 사용자 (기준 시안 고르기와 옮기는 방식(점 메뉴, CSS 범위, 자산 위치)은 Claude, 사용자 확인 전)
+- 내용: 디자인 캔버스 "코치님 롤링페이퍼 시안"의 "1. 프레젠테이션 (스크롤)"(`Story.dc.html`)을 `/`에 둔다. 보드는 `/rolling-paper`로 옮긴다. 입장 코드는 두 페이지 모두 확인한다. 시안 원본은 `references/Story.dc.html`로 저장해 SSOT에 넣는다. 옮기는 방식은 `ui.md` 7-5.
+- 이유: 사용자가 처음 들어왔을 때 프레젠테이션이 나오게 해 달라고 했다. 보드 주소와 입장 코드 범위는 사용자가 골랐다(프레젠테이션에도 코치님 사진이 있어 전달 전에 보이면 안 된다). 캔버스에는 "1. 프레젠테이션 (스크롤) copy"(`Story-wg6g.dc.html`)도 있지만, 캔버스 순서 첫째이고 복사본이 아닌 `Story.dc.html`을 기준으로 삼았다.
+- 검토한 대안: 보드 주소 `/board`. 프레젠테이션은 공개하고 보드만 입장 코드 확인.
+- 바뀐 곳: 문서 `ui.md` 7-1·7-5, `nextjs-setup.md` 3-4, `Story.dc.html`(추가), `.claude/rules/ssot.md`, `.claude/skills/spec/SKILL.md`, `CLAUDE.md`. 코드 `app/page.tsx`, `app/rolling-paper/page.tsx`(옮김), `components/Story.tsx`, `components/Story.css`, `public/story/`. 로드맵 Phase 2·3.

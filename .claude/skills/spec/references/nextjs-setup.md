@@ -42,12 +42,15 @@ export default nextConfig;
 ```
 app/
   layout.tsx          # 폰트(Gaegu, Nanum Pen Script, Gowun Dodum) 적용
-  page.tsx            # 입장 확인 → 보드 데이터 + 내 작성자 키를 Board에 전달
+  page.tsx            # 입장 확인 → 프레젠테이션(Story)
+  rolling-paper/page.tsx  # 입장 확인 → 보드 데이터 + 내 작성자 키를 Board에 전달
   gate/page.tsx       # 입장 코드 입력 화면
   actions.ts          # Server Actions (메모 작성, 스티커 붙이기·떼기, 입장)
 components/
+  Story.tsx, Story.css  # 프레젠테이션(Story.dc.html) 화면
   Board.tsx           # 'use client', 프로토타입 화면과 상호작용
   NoteCard.tsx, WriteDialog.tsx, ReadDialog.tsx, StickerDock.tsx
+public/story/         # 프레젠테이션 사진·영상
 lib/
   notion.ts           # Notion 클라이언트(SDK 재시도), 조회 도우미
   board.ts            # 보드 조회(캐시), Notion 응답 → 도메인 타입 변환

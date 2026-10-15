@@ -1,8 +1,11 @@
-## 7. 화면 (`app/page.tsx`와 클라이언트 컴포넌트)
+## 7. 화면 (페이지와 클라이언트 컴포넌트)
 
 ### 7-1. 페이지
 
+`/`에는 프레젠테이션(7-5)이 나오고, 보드는 `/rolling-paper`(`app/rolling-paper/page.tsx`)에 있습니다.
+
 ```tsx
+// app/rolling-paper/page.tsx
 import { Suspense } from 'react';
 import { redirect } from 'next/navigation';
 import { getBoard } from '@/lib/board';
@@ -126,3 +129,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }
 ```
+
+### 7-5. 프레젠테이션
+
+`/`(`app/page.tsx`)는 보드와 같은 방식으로 `<Suspense>` 안에서 `isEntered()`를 확인하고, 입장하지 않았으면 `/gate`로 보냅니다. 입장 코드를 맞히면 `/`로 돌아와 프레젠테이션부터 봅니다. 화면은 `Story.dc.html`을 `components/Story.tsx`(서버 컴포넌트)로 옮기고, 마지막 "롤링페이퍼 보러 가기"와 메뉴의 "롤링페이퍼 보기"로 보드에 들어갑니다.
+
+| 시안 (`Story.dc.html`) | Next.js에서 할 일 |
+| --- | --- |
+| `/_blob/...` 사진·영상 | `public/story/`에 둡니다(`hero.mp4`, `hero-poster.jpg`, `first-meet.jpg`, `smile.jpg`, `group.jpg`). 사진은 `next/image`로 보여 줍니다 |
+| `href="Prototype.dc.html"` 링크 | `/rolling-paper`로 이동합니다 |
+| Noto Sans KR Google Fonts 링크 | `next/font/google`의 `Noto_Sans_KR`(400·500·700·800, `preload: false`)로 불러옵니다 |
+| `<style>`의 규칙 | `components/Story.css`에 두되, 보드에 새지 않게 `.story`와 `html:has(.story)` 아래로 한정합니다. 모든 링크에 색이 따로 있어 효과가 없는 `a` 색 규칙과 쓰이지 않는 `.xwrap`, `.xfade`, `.xfade-out`은 옮기지 않습니다 |
+| 오른쪽 점 메뉴의 링크 9개 | 시안에 있는 섹션(오프닝, 처음 만난 날, 웃는 얼굴, 숫자로 보는 시간, 단체 사진, 롤링페이퍼로)만 화면 순서대로 둡니다. 없는 섹션(`s6`~`s8`)으로 가는 점은 뺍니다. 점의 기본 모양과 760px 이하에서 숨기기는 CSS로 옮겨, 인라인 스타일에 막혀 있던 hover 색과 미디어 쿼리가 적용되게 합니다 |
+| `heroRef`로 영상 재생 | `autoPlay`, `muted`, `loop`, `playsInline` 속성으로 대신합니다 |
+| `<title>시지프에게 드리는 발표</title>` | `app/page.tsx`의 `metadata.title`로 둡니다 |
+
+`public/`의 파일은 입장 코드와 관계없이 주소를 알면 열 수 있습니다.

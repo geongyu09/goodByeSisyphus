@@ -37,19 +37,20 @@
 - [x] `components/NoteCard.tsx`: 메모 카드(색·핀·기울기·5줄 말줄임·"펼쳐 보기"·From·스티커 표시, 줄바꿈은 `pre-line`) — 근거: `.claude/skills/spec/references/Prototype.dc.html` (`.note` 버튼, `view()`), `.claude/skills/spec/references/security.md#8-보안-체크리스트`
 - [x] `components/Board.tsx`: 검색, 정렬(최신·오래된·스티커 많은 순·무작위 `rng`), 더 보기, 상태 문구, 빈 보드·검색 결과 없음(D-8, D-13) — 근거: `.claude/skills/spec/references/ui.md#7-2-클라이언트-컴포넌트에서-낙관적-업데이트`, `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`, `.claude/skills/spec/references/Prototype.dc.html` (`renderVals()`)
 - [x] `components/ReadDialog.tsx`: 읽기 모달(이전/다음, 위치 표시, 닫기), "한 장 뽑아 읽기", 스티커 개수 요약 — 근거: `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`, `.claude/skills/spec/references/Prototype.dc.html` (`hasOpen` 모달)
-- [x] `app/page.tsx`: `Suspense`와 `BoardLoader`로 `getBoard()` 결과를 `Board`에 전달(입장 확인과 `myKey`는 Phase 3에서 연결) — 근거: `.claude/skills/spec/references/ui.md#7-1-페이지`
+- [x] `app/rolling-paper/page.tsx`(D-24 전 `app/page.tsx`): `Suspense`와 `BoardLoader`로 `getBoard()` 결과를 `Board`에 전달(입장 확인과 `myKey`는 Phase 3에서 연결) — 근거: `.claude/skills/spec/references/ui.md#7-1-페이지`
 - [x] "PDF로 저장" 버튼: 인쇄할 때 모든 메모를 전문으로 그리고 버튼·도구·모달을 빼기, 메모를 세로 단으로 이어 붙이기(D-20, D-21, D-22) — 근거: `.claude/skills/spec/references/ui.md#7-3-프로토타입-로직-옮기기`
+- [x] `app/page.tsx`, `components/Story.tsx`: `/`에 프레젠테이션, 보드는 `/rolling-paper`로 옮기기(D-24) — 근거: `.claude/skills/spec/references/ui.md#7-5-프레젠테이션`, `.claude/skills/spec/references/Story.dc.html`
 
 ## Phase 3: 작성자 식별과 입장 코드
 목표: 로그인 없이 브라우저마다 작성자 키를 발급하고, 입장 코드를 확인한 브라우저만 보드를 볼 수 있게 한다.
-완료 조건: 입장 쿠키 없이 `/`에 접속하면 `/gate`로 이동한다. 맞는 코드를 입력하면 보드에 들어가고, 틀리거나 빈 코드는 거부된다. `rp_author`·`rp_gate` 쿠키가 `httpOnly`다. 보드 데이터에는 원래 id가 아니라 `authorKey`만 나온다. `cacheComponents` 상태에서 빌드가 통과한다.
+완료 조건: 입장 쿠키 없이 `/`에 접속하면 `/gate`로 이동한다. 맞는 코드를 입력하면 `/`(프레젠테이션)로 들어가고, 틀리거나 빈 코드는 거부된다. `rp_author`·`rp_gate` 쿠키가 `httpOnly`다. 보드 데이터에는 원래 id가 아니라 `authorKey`만 나온다. `cacheComponents` 상태에서 빌드가 통과한다.
 
 - [x] `lib/identity.ts`: `toAuthorKey`, `ensureAuthorKey`, `readAuthorKey` — 근거: `.claude/skills/spec/references/identity-gate.md#5-1-작성자-키-libidentityts`
 - [x] `lib/gate.ts`: `isEntered`, `enter` — 근거: `.claude/skills/spec/references/identity-gate.md#5-2-입장-코드-libgatets`
 - [x] `lib/schema.ts`: `NoteInput`, `StickerInput`, `NoteIdInput`, `PasscodeInput` — 근거: `.claude/skills/spec/references/server-actions.md#6-1-입력-검증-libschemats`
 - [x] `app/actions.ts`: `guard`와 `enterAction` — 근거: `.claude/skills/spec/references/server-actions.md#6-2-액션`
 - [x] `app/gate/page.tsx`: 입장 코드 입력 화면(D-10) — 근거: `.claude/skills/spec/references/nextjs-setup.md#3-4-폴더-구조`, `.claude/skills/spec/references/identity-gate.md#5-2-입장-코드-libgatets`
-- [x] `app/page.tsx`: 입장 확인 후 `/gate`로 리다이렉트, `readAuthorKey()`로 `myKey` 전달 — 근거: `.claude/skills/spec/references/ui.md#7-1-페이지`
+- [x] `app/page.tsx`·`app/rolling-paper/page.tsx`: 입장 확인 후 `/gate`로 리다이렉트, `readAuthorKey()`로 `myKey` 전달 — 근거: `.claude/skills/spec/references/ui.md#7-1-페이지`
 
 ## Phase 4: 쓰기 기능 (메모·스티커)
 목표: 메모 작성과 스티커 붙이기·옮기기·떼기를 Notion에 저장하고, 낙관적 업데이트로 화면에 먼저 보여 준다.

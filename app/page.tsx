@@ -1,20 +1,21 @@
 import { Suspense } from 'react';
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
-import { getBoard } from '@/lib/board';
-import { readAuthorKey } from '@/lib/identity';
 import { isEntered } from '@/lib/gate';
-import Board from '@/components/Board';
+import Story from '@/components/Story';
 
+export const metadata: Metadata = { title: '시지프에게 드리는 발표' };
+
+// 프레젠테이션 (D-24)
 export default function Page() {
   return (
-    <Suspense fallback={<p>보드를 불러오는 중이에요…</p>}>
-      <BoardLoader />
+    <Suspense>
+      <StoryLoader />
     </Suspense>
   );
 }
 
-async function BoardLoader() {
+async function StoryLoader() {
   if (!(await isEntered())) redirect('/gate');
-  const [notes, myKey] = await Promise.all([getBoard(), readAuthorKey()]);
-  return <Board initialNotes={notes} myKey={myKey} />;
+  return <Story />;
 }

@@ -10,6 +10,7 @@
 - `.claude/skills/spec/references/server-actions.md`
 - `.claude/skills/spec/references/ui.md`
 - `.claude/skills/spec/references/Prototype.dc.html`
+- `.claude/skills/spec/references/Story.dc.html`
 - `.claude/skills/spec/references/security.md`
 - `.claude/skills/spec/references/deploy.md`
 - `.claude/skills/spec/references/dev-order-and-limits.md`
