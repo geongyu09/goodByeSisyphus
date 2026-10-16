@@ -92,7 +92,10 @@ export default function Story() {
           <div style={{ flex: '1 1 360px', minWidth: 0 }}>
             <p className="reveal" style={pill}>시지프</p>
             <h2 className="reveal" style={{ ...bigTitle, color: '#1D1D1F' }}>늘 이렇게<br />웃어주셨죠.</h2>
-            <p className="reveal" style={{ ...lead, maxWidth: 440, color: '#6E6E73' }}>언제나 열정적인 모습으로 .... 뭐라뭐라</p>
+            <p className="reveal" style={{ ...lead, maxWidth: 440, color: '#6E6E73' }}>
+              코치로서 언제나 누구보다 열정적인 모습을 보여주셔서, 크루로서 그 곁에서 배우는 하루하루가 정말 든든하고 즐거웠어요.<br />
+              <span style={{ display: 'inline-block', marginTop: 12, color: '#1D1D1F', fontWeight: 700 }}>이런 인자한 미소와 함께!</span>
+            </p>
           </div>
           <div className="reveal" style={{ flex: '1 1 420px', minWidth: 0, borderRadius: 28, overflow: 'hidden', aspectRatio: '4 / 5', background: '#F5F5F7' }}>
             <Image className="zoom" src={smile} alt="환하게 웃고 있는 시지프" sizes="(max-width: 900px) 100vw, 540px" style={{ ...cover, objectPosition: '50% 20%' }} />
@@ -126,16 +129,17 @@ export default function Story() {
         </div>
       </section>
 
-      <section id="s9" className="slide" style={{ background: '#000000', color: '#F5F5F7', minHeight: 'clamp(640px, 100vh, 820px)', padding: '120px 24px 64px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-        <h2 className="reveal" style={{ margin: 0, fontSize: 'clamp(44px, 7vw, 96px)', lineHeight: 1.08, fontWeight: 800, letterSpacing: '-0.03em' }}>시지프와 함께한 <br /><span style={{ color: '#0064FF' }}>고마운 마음</span>을 담아봤어요</h2>
-        <p className="reveal" style={{ margin: '24px 0 0', maxWidth: 560, fontSize: 'clamp(19px, 2vw, 24px)', lineHeight: 1.5, color: '#A1A1A6' }}>크루가 한 장씩 붙인 메모가 기다리고 있어요.</p>
+      <section id="s9" className="slide" style={{ background: 'radial-gradient(ellipse 75% 60% at 50% 105%, rgba(0,100,255,0.6) 0%, rgba(0,100,255,0.18) 45%, rgba(0,100,255,0) 75%), #000000', borderTop: '1px solid rgba(0,100,255,0.35)', color: '#F5F5F7', minHeight: 'clamp(640px, 100vh, 820px)', padding: '120px 24px 64px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
+        <p className="reveal" style={{ ...pill, margin: '0 0 20px', background: 'rgba(0,100,255,0.18)', border: '1px solid rgba(0,100,255,0.7)', fontSize: 17, color: '#9CC2FF' }}>To. 시지프</p>
+        <h2 className="reveal" style={{ margin: 0, fontSize: 'clamp(44px, 7vw, 96px)', lineHeight: 1.08, fontWeight: 800, letterSpacing: '-0.03em' }}>시지프와 함께한 <br /><span style={{ color: '#0064FF', textShadow: '0 0 48px rgba(0,100,255,0.75)' }}>고마운 마음</span>을 담아봤어요</h2>
+        <p className="reveal" style={{ margin: '24px 0 0', maxWidth: 560, fontSize: 'clamp(19px, 2vw, 24px)', lineHeight: 1.5, color: '#B9CCEB' }}>크루가 한 장씩 붙인 메모가 기다리고 있어요.</p>
         <div className="reveal" style={{ marginTop: 44, display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center' }}>
           <Link href="/rolling-paper" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, minHeight: 56, padding: '0 32px', borderRadius: 999, background: '#0064FF', color: '#FFFFFF', textDecoration: 'none', fontSize: 19, fontWeight: 800, boxShadow: '0 12px 32px rgba(0,100,255,0.45)' }}>
             롤링페이퍼 보러 가기<svg {...arrow} strokeWidth={2.2}><path d="M5 12h14" /><path d="m13 6 6 6-6 6" /></svg>
           </Link>
-          <a href="#top" style={{ display: 'inline-flex', alignItems: 'center', minHeight: 56, padding: '0 28px', borderRadius: 999, border: '1px solid #48484A', color: '#F5F5F7', textDecoration: 'none', fontSize: 17 }}>처음부터 다시 보기</a>
+          <a href="#top" style={{ display: 'inline-flex', alignItems: 'center', minHeight: 56, padding: '0 28px', borderRadius: 999, border: '1px solid rgba(0,100,255,0.7)', background: 'rgba(0,100,255,0.1)', color: '#DCE8FF', textDecoration: 'none', fontSize: 17 }}>처음부터 다시 보기</a>
         </div>
-        <p style={{ margin: '96px 0 0', fontSize: 13, color: '#86868B' }}>8기 프론트엔드 크루 일동 · 26.10.16</p>
+        <p style={{ margin: '96px 0 0', fontSize: 13, color: '#B9CCEB' }}>8기 프론트엔드 크루 일동 · 26.10.16</p>
       </section>
     </div>
   );
