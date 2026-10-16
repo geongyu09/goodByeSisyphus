@@ -84,6 +84,17 @@ export default function Board({ initialNotes, myKey }: { initialNotes: Note[]; m
     };
   }, []);
 
+  // ESC로 열린 모달을 닫는다. 한글 조합 중 ESC는 조합만 끝내게 둔다 (D-32)
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape' || e.isComposing) return;
+      setOpenId(null);
+      setWriting(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
   const q = printing ? '' : query.trim().toLowerCase();
   const filtered = (q ? notes.filter((n) => n.nick.toLowerCase().includes(q) || n.msg.toLowerCase().includes(q)) : [...notes]).sort(newest);
   if (sort === 'old') filtered.reverse();
