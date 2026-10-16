@@ -83,6 +83,11 @@ export default function Story() {
             <p className="reveal" style={pill}>처음 시지프를 만난(?)날 · 25.09.24</p>
             <h2 className="reveal" style={{ ...bigTitle, color: '#2b1d10' }}>처음 만난 건,<br />화면 너머였어요.</h2>
             <p className="reveal" style={{ ...lead, maxWidth: 460, color: '#A1A1A6' }}>8기 입시 설명회를 온라인으로 보던 날, 화면 속에서 웃고 있던 사람이 시지프였어요. 그때는 이렇게 오래 함께하게 될 줄 몰랐죠.</p>
+            <p className="reveal" style={{ margin: '32px 0 0' }}>
+              <a href="https://www.youtube.com/live/cv01__jxppU?si=TJnuIp800j26hsMX&t=208" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, minHeight: 52, padding: '0 24px', borderRadius: 999, background: '#1D1D1F', color: '#F5F5F7', textDecoration: 'none', fontSize: 17, fontWeight: 700 }}>
+                보러 가기<svg {...arrow} strokeWidth={2.2}><path d="M7 17 17 7" /><path d="M7 7h10v10" /></svg>
+              </a>
+            </p>
           </div>
         </div>
       </section>
