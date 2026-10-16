@@ -126,6 +126,11 @@ export default function Story() {
           <div className="grow" style={{ marginTop: 48, aspectRatio: '2000 / 1126', overflow: 'hidden', background: '#1D1D1F' }}>
             <Image src={group} alt="시지프와 크루들이 브이를 하며 찍은 단체 사진" sizes="(max-width: 1128px) 100vw, 1080px" style={cover} />
           </div>
+          <p className="reveal" style={{ margin: '32px 0 0', textAlign: 'right' }}>
+            <a href="https://photos.app.goo.gl/tD4Phm4Q6Z2vhjte7" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, minHeight: 56, padding: '0 28px', borderRadius: 999, border: '1px solid rgba(245,245,247,0.3)', background: 'rgba(245,245,247,0.08)', color: '#F5F5F7', textDecoration: 'none', fontSize: 'clamp(20px, 2.4vw, 28px)', fontWeight: 700, letterSpacing: '-0.02em' }}>
+              저희 잊지 말아주세요<svg {...arrow} strokeWidth={2.2}><path d="M7 17 17 7" /><path d="M7 7h10v10" /></svg>
+            </a>
+          </p>
         </div>
       </section>
 
